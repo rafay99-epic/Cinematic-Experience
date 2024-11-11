@@ -1,0 +1,35 @@
+---
+import TagFilter from "../components/ReactCompoent/tag/tag";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).map((post) => ({
+  title: post.data.title,
+  description: post.data.description,
+  publishDate: post.data.publishDate,
+  readingTime: post.data.readingTime,
+  slug: post.slug,
+  tags: post.data.tags,
+  heroimage: post.data.heroimage,
+  draft: post.data.draft,
+}));
+const title = "Cinematic Experience | Tags Articles";
+const description = "Tag articles.";
+const permalink = `${Astro.site.href}blog`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="tag"
+>
+  <main>
+    <div class="tag-wrapper">
+      <h1>Tags</h1>
+      <div class="tag-container">
+        <TagFilter client:only="react" posts={posts} />
+      </div>
+    </div>
+  </main>
+</BaseLayout>

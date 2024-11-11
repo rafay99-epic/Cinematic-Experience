@@ -151,6 +151,20 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"Ghost of Tsushima.md": {
+	id: "Ghost of Tsushima.md";
+  slug: "ghost-of-tsushima";
+  body: string;
+  collection: "blog";
+  data: any
+} & { render(): Render[".md"] };
+"god-of-war-ragnarok.md": {
+	id: "god-of-war-ragnarok.md";
+  slug: "god-of-war-ragnarok";
+  body: string;
+  collection: "blog";
+  data: any
+} & { render(): Render[".md"] };
 "hello-world.md": {
 	id: "hello-world.md";
   slug: "hello-world";

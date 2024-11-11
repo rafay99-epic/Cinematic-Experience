@@ -2,7 +2,7 @@
 title: Hello World 👋
 publishDate: 30 Nov 2021
 description: Every blog starts with a single post. This is yours. Make it great.
-draft: false
+draft: true
 tags: ["hello", "world", "blog"]
 heroimage: /assets/blog/casual-life-3d-meditation-crystal.webp
 readingTime: 5 min read
