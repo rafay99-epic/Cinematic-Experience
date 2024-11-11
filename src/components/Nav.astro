@@ -54,6 +54,178 @@ const { current = "" } = Astro.props;
     width: 75px;
   }
 
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    background-color: var(--background-body);
+    width: 100%;
+    z-index: 10;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+  }
+
+  .mobile-menu a {
+    padding: 12px 5px;
+    color: var(--text-main);
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid var(--primary-color);
+  }
+
+  .hamburger.open .line1 {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.open .line2 {
+    opacity: 0;
+  }
+
+  .hamburger.open .line3 {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .mobile-menu.active {
+    transform: translateY(0);
+  }
+
+  @media screen and (max-width: 768px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .hamburger {
+      display: block;
+      padding-right: 15px;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    .theme-toggle-container {
+      margin-right: 1em;
+    }
+  }
+</style>
+
+<nav>
+  <!-- Desktop Navbar -->
+  <div class="desktop-nav hidden md:flex">
+    <a class={current === "" ? "selected" : ""} href="/">home</a>
+    <a class={current === "blog" ? "selected" : ""} href="/blog">blog</a>
+    <a class={current === "tag" ? "selected" : ""} href="/tag">tag</a>
+    <a class={current === "search" ? "selected" : ""} href="/search">search</a>
+    <div class="theme-toggle-container">
+      <ThemeToggleButton client:load />
+    </div>
+  </div>
+
+  <!-- Mobile Hamburger Menu Button -->
+  <button class="hamburger md:hidden focus:outline-none" onclick="toggleMenu()">
+    <div
+      class="line1 w-6 h-1 bg-gray-200 mb-1 transform transition-all duration-300"
+    >
+    </div>
+    <div
+      class="line2 w-6 h-1 bg-gray-200 mb-1 transform transition-all duration-300"
+    >
+    </div>
+    <div
+      class="line3 w-6 h-1 bg-gray-200 mb-1 transform transition-all duration-300"
+    >
+    </div>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="mobile-menu">
+  <a href="/" class={current === "" ? "selected" : ""}>Home</a>
+  <a href="/blog" class={current === "blog" ? "selected" : ""}>Blog</a>
+  <a href="/tag" class={current === "tag" ? "selected" : ""}>Tag</a>
+  <a href="/search" class={current === "search" ? "selected" : ""}>Search</a>
+  <div class="theme-toggle-container">
+    <ThemeToggleButton client:load />
+  </div>
+</div>
+
+<script lang="ts">
+  function toggleMenu() {
+    const menu = document.getElementById("mobile-menu");
+    const hamburger = document.querySelector(".hamburger");
+    menu.classList.toggle("active");
+    hamburger.classList.toggle("open");
+  }
+</script>
+
+<!-- Orginal Code base -->
+
+<!-- ---
+import ThemeToggleButton from "./ThemeToggleButton.svelte";
+const { current = "" } = Astro.props;
+---
+
+<style>
+  nav {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    font-family: var(--font-family-sans);
+    font-weight: 700;
+    justify-content: flex-end;
+    text-transform: uppercase;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    padding: 10px 5px;
+    display: block;
+    position: relative;
+    margin-left: 20px;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  a:not(.selected) {
+    opacity: 0.7;
+  }
+
+  a::before {
+    content: "";
+    position: absolute;
+    transition: transform 0.3s ease;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-secondary);
+    transform: scaleX(0);
+  }
+
+  a:hover::before,
+  .selected::before {
+    transform: scaleX(1);
+  }
+
+  .selected::before {
+    background: var(--primary-color);
+  }
+
+  .theme-toggle-container {
+    width: 75px;
+  }
+
   @media screen and (max-width: 520px) {
     .theme-toggle-container {
       margin-right: 1em;
@@ -69,4 +241,4 @@ const { current = "" } = Astro.props;
   <div class="theme-toggle-container">
     <ThemeToggleButton client:load />
   </div>
-</nav>
+</nav> -->
