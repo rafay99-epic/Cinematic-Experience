@@ -17,50 +17,34 @@ interface TagFilterProps {
 }
 
 const TagFilter: React.FC<TagFilterProps> = ({ posts }) => {
-  // Filter out posts that are drafts
   const publishedPosts = posts.filter((post) => !post.draft);
 
-  // Gather unique tags from published posts only
   const allTags = Array.from(
     new Set(publishedPosts.flatMap((post) => post.tags || []))
   ).sort();
 
-  // State to hold the selected tag and filtered posts
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  // Filter posts by selected tag
   const filteredPosts = selectedTag
     ? publishedPosts.filter((post) => post.tags?.includes(selectedTag))
     : publishedPosts;
 
-  // Handle tag click
   const handleTagClick = (tag: string) => {
     setSelectedTag(tag === selectedTag ? null : tag);
   };
 
   return (
     <div>
-      <div className="tags-container" style={{ marginBottom: "1rem" }}>
+      <div className="tags-container mb-4 flex flex-wrap">
         {allTags.map((tag: string) => (
           <button
             key={tag}
             onClick={() => handleTagClick(tag)}
-            style={{
-              padding: "0.5rem 1rem",
-              margin: "0.2rem",
-              borderRadius: "5px",
-              backgroundColor:
-                selectedTag === tag
-                  ? "var(--primary-color)"
-                  : "var(--background-body)",
-              color: selectedTag === tag ? "#fff" : "var(--text-main)",
-              border: `1px solid ${
-                selectedTag === tag
-                  ? "var(--primary-color)"
-                  : "var(--text-secondary)"
-              }`,
-              cursor: "pointer",
-            }}
+            className={`px-4 py-2 m-1 rounded-lg border text-sm cursor-pointer ${
+              selectedTag === tag
+                ? "bg-primary-color text-white border-primary-color"
+                : "bg-background-body text-text-main border-text-secondary"
+            }`}
           >
             {tag}
           </button>
@@ -70,34 +54,23 @@ const TagFilter: React.FC<TagFilterProps> = ({ posts }) => {
       <div className="posts-container">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
-            <div
-              key={post.slug}
-              className="post-item"
-              style={{ marginBottom: "1.5rem" }}
-            >
-              <h2>
+            <div key={post.slug} className="post-item mb-6">
+              <h2 className="text-xl font-bold">
                 <a
                   href={`/blog/${post.slug}`}
-                  style={{
-                    color: "var(--primary-color)",
-                    textDecoration: "none",
-                  }}
+                  className="text-primary-color hover:underline"
                 >
                   {post.title}
                 </a>
               </h2>
-              <p style={{ color: "var(--text-secondary)" }}>
-                {post.description}
-              </p>
-              <small style={{ color: "var(--text-secondary)" }}>
+              <p className="text-text-secondary">{post.description}</p>
+              <small className="text-text-secondary">
                 {post.publishDate} • {post.readingTime}
               </small>
             </div>
           ))
         ) : (
-          <p style={{ color: "var(--text-secondary)" }}>
-            No posts found for this tag.
-          </p>
+          <p className="text-text-secondary">No posts found for this tag.</p>
         )}
       </div>
     </div>

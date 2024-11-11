@@ -1,0 +1,31 @@
+---
+import Image from "astro/components/Image.astro";
+
+export interface Props {
+  permalink: string;
+  heroImage?: string;
+}
+const { heroImage } = Astro.props;
+---
+
+<html lang="en">
+  <body>
+    <div class="layout flex flex-col min-h-screen">
+      <article class="w-full max-w-4xl mx-auto p-4 md:p-8 rounded-lg">
+        {
+          heroImage && (
+            <Image
+              src={heroImage || ""}
+              alt="Hero Image Blog"
+              format="avif"
+              width={1020}
+              height={510}
+              class="w-full h-auto rounded-lg object-cover mb-4"
+            />
+          )
+        }
+        <slot />
+      </article>
+    </div>
+  </body>
+</html>
