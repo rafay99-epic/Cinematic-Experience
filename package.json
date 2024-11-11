@@ -1,6 +1,6 @@
 {
-  "name": "astro-blog-template",
-  "version": "0.0.1",
+  "name": "cinematic_experience",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
