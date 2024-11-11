@@ -9,7 +9,7 @@ import react from "@astrojs/react";
 import vercel from "@astrojs/vercel/static";
 
 export default defineConfig({
-  site: "https://astro-blog-template.netlify.app",
+  site: "https://cinematic-experience.vercel.app/",
   integrations: [
     mdx(),
     svelte(),
@@ -18,10 +18,12 @@ export default defineConfig({
       include: ["**/react/*"],
     }),
   ],
-  build: {
-    format: "file",
-  },
   output: "static",
+  vite: {
+    optimizeDeps: {
+      include: ["@astrojs/react"],
+    },
+  },
   markdown: {
     shikiConfig: {
       theme: "nord",
