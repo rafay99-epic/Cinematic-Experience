@@ -8,7 +8,7 @@ description: >-
   movie since 'Endgame' but is it really the case??
 publishDate: 2024-11-30T19:00:00.000Z
 readingTime: 5 min read
-draft: true
+draft: false
 heroImage: >-
   /assets/blog/358a542b6721a1c8a8c54b76735a18dbca9fdaa1d6c3bc1d06c0c36c28abfe3d._SX1080_FMjpg_.jpg
 tags:
