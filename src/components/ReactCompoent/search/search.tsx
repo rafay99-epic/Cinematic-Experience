@@ -62,7 +62,8 @@ const SearchBlog: React.FC<SearchBlogProps> = ({ posts }) => {
                 {post.title}
               </h2>
               <p className="text-xs text-text-secondary mb-1">
-                {post.publishDate} ~ {post.readingTime}
+                {new Date(post.publishDate).toLocaleDateString()} ~{" "}
+                {post.readingTime}
               </p>
               <p className="text-sm mb-2">{post.description}</p>
               {post.tags && (

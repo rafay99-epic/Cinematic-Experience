@@ -65,7 +65,8 @@ const TagFilter: React.FC<TagFilterProps> = ({ posts }) => {
               </h2>
               <p className="text-text-secondary">{post.description}</p>
               <small className="text-text-secondary">
-                {post.publishDate} • {post.readingTime}
+                {new Date(post.publishDate).toLocaleDateString()} ~{" "}
+                {post.readingTime}
               </small>
             </div>
           ))
