@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-
+import BlogList from "../../components/ReactCompoent/blogPosts/BlogPost";
 const title = "Cinematic Experience | Blog";
 const description = "Latest articles.";
 const permalink = `${Astro.site.href}blog`;
@@ -20,46 +20,6 @@ const allPosts = (await getCollection("blog")).sort(
   current="blog"
 >
   <div class="container">
-    <h1>Blog</h1>
-    {
-      allPosts
-        .filter((post) => !post.data.draft)
-        .map((post, index) => {
-          const href = `/blog/${post.slug}`;
-          return (
-            <div>
-              {index !== 0 && <hr />}
-              <div class="post-item">
-                <h2>
-                  <a href={href}>{post.data.title}</a>
-                </h2>
-                <p>{post.data.description}</p>
-                <div class="post-item-footer">
-                  <span class="post-item-date">— {post.data.publishDate}</span>
-                </div>
-              </div>
-            </div>
-          );
-        })
-    }
+    <BlogList posts={allPosts} />
   </div>
 </BaseLayout>
-
-<style>
-  h2,
-  .post-item-footer {
-    font-family: var(--font-family-sans);
-    font-weight: 700;
-  }
-
-  .post-item-date {
-    color: var(--text-secondary);
-    text-align: left;
-    text-transform: uppercase;
-    margin-right: 16px;
-  }
-
-  hr {
-    margin: 60px auto;
-  }
-</style>
