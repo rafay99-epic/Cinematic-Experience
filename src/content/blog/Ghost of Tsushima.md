@@ -8,7 +8,7 @@ description: >-
   embrace the path of the Ghost?
 publishDate: 2024-11-29T19:00:00.000Z
 readingTime: 10 min read
-draft: false
+draft: true
 heroImage: /assets/blog/ghost of tsushima.png
 tags:
   - Video-Game
